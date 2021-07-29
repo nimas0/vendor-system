@@ -1,7 +1,7 @@
 from rest_framework import routers
-from .api import VendorViewSet
+from django.contrib import admin
+from django.urls import path, include
 
-router = routers.DefaultRouter()
-router.register('api/vendor',VendorViewSet,'vendorbackend')
-
-urlpatterns = router.urls
+urlpatterns = [
+    
+]
