@@ -2,6 +2,17 @@ from django.db import models
 import json
 
 class Photographer(models.Model):
+
+    # Queries vendors that are only active 
+    class PhotographerObject(models.Manager):
+        def get_queryset(self):
+            return super().get_queryset.filter(status='active')
+
+    options = (
+        ('active', 'Active'),
+        ('inactive', 'Inactive')
+    )
+
     vendor_id = models.IntegerField()
     company_name = models.CharField(max_length=100)
     # max length of 1000 is randomly picked to handle dictionary length
@@ -20,6 +31,9 @@ class Photographer(models.Model):
     fixed_cost = models.IntegerField()
     distance_cost = models.CharField(max_length=1000)
     size_cost = models.CharField(max_length=1000)
+
+    # Keeps track if the vendor is active or inactive (able to recieve jobs or not)
+    status = models.CharField(max_length=10, choices=options, default='active')
 
     def __str__(self):
         return f"{self.vendor_id}: {self.company_name}"
