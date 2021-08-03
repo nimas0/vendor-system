@@ -5,7 +5,48 @@ from .models import Photographer
 
 # For testing: p = Photographer(vendor_id = 0, company_name = "1", address = "2", phone_number = "3", email = "4@findingspaces.com", availability = "5", acceptance_score = 6, total_job_offers = 7, rating_score = 8, total_ratings = 9, fixed_cost = 10, distance_cost = "11", size_cost = "12")
 #              p.save()
+"""
+ {"vendor_id" : 0,
+ "company_name" : "1", 
+ "address": "2", 
+ "phone_number" : "3", 
+ "email" : "4@findingspaces.com", 
+ "availability" : "5", 
+ "acceptance_score" : 6, 
+ "total_job_offers" : 7, 
+ "rating_score" : 8, 
+ "total_ratings" : 9, 
+ "fixed_cost" : 10, 
+ "distance_cost" : "11", 
+ "size_cost" : "12",
+ "appointments":"{13}",
+ "status":"active"
+ }
+ """
 class PhotographerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Photographer
+        fields = [
+            'vendor_id',
+            'company_name',
+            'address',
+            'phone_number',
+            'email',
+            'availability',
+            'acceptance_score',
+            'total_job_offers',
+            'rating_score',
+            'total_ratings',
+            'fixed_cost',
+            'distance_cost',
+            'size_cost',
+            'appointments',
+            'status']
+
+
+
+
+    """
     vendor_id = serializers.IntegerField()
     company_name = serializers.CharField(max_length=100)
     # max length of 1000 is randomly picked to handle dictionary length
@@ -24,6 +65,8 @@ class PhotographerSerializer(serializers.ModelSerializer):
     distance_cost = serializers.CharField(max_length=1000)
     size_cost = serializers.CharField(max_length=1000)
 
+    appointments = serializers.CharField()
+
     def create(self, validated_data):
         return Photographer.objects.create(validated_data)
 
@@ -41,4 +84,5 @@ class PhotographerSerializer(serializers.ModelSerializer):
         instance.fixed_cost= validated_data.get('fixed_cost', instance.fixed_cost)
         instance.distance_cost = validated_data.get('distance_cost', instance.distance_cost)
         instance.size_cost = validated_data.get('size_cost', instance.size_cost)
-        
+        instance.appointments = validated_data.get('appointments', instance.appointments)
+    """

@@ -13,13 +13,13 @@ class Photographer(models.Model):
         ('inactive', 'Inactive')
     )
 
-    vendor_id = models.IntegerField()
-    company_name = models.CharField(max_length=100)
+    vendor_id = models.IntegerField(primary_key=True)
+    company_name = models.CharField(max_length=1000)
     # max length of 1000 is randomly picked to handle dictionary length
     address = models.CharField(max_length=1000)
     phone_number = models.CharField(max_length=100, unique=True)
     email = models.EmailField(max_length=254, unique=True)
-    availability = models.CharField(max_length=1000)
+    availability = models.TextField()
 
     acceptance_score = models.IntegerField()
     total_job_offers = models.IntegerField()
@@ -29,8 +29,10 @@ class Photographer(models.Model):
 
 
     fixed_cost = models.IntegerField()
-    distance_cost = models.CharField(max_length=1000)
-    size_cost = models.CharField(max_length=1000)
+    distance_cost = models.TextField()
+    size_cost = models.TextField()
+
+    appointments = models.TextField()
 
     # Keeps track if the vendor is active or inactive (able to recieve jobs or not)
     status = models.CharField(max_length=10, choices=options, default='active')
@@ -71,3 +73,12 @@ class Photographer(models.Model):
 
     def get_distance_cost(self):
         return json.loads(self.distance_cost)
+
+
+   # This takes in a JSON object of a dictionary as the parameter and converts it to a string for CharField
+    def set_appointments(self, new_appointments):
+        self.appointments = json.dumps(new_appointments)
+
+
+    def get_appointments(self):
+        return json.loads(self.appointments)
