@@ -6,6 +6,7 @@ from .models import Photographer
 # Register your models here.
 @admin.register(Photographer)
 class PhotographerModel(admin.ModelAdmin):
-    list_filter = ('vendor_id', 'company_name')
-    list_display = ('vendor_id', 'company_name')
+    list_filter = ('id', 'company_name')
+    list_display = ('id', 'company_name')
+
 

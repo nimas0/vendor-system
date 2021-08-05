@@ -13,7 +13,7 @@ class Photographer(models.Model):
         ('inactive', 'Inactive')
     )
 
-    vendor_id = models.IntegerField(primary_key=True)
+    # vendor_id = models.IntegerField(primary_key=True)
     company_name = models.CharField(max_length=1000)
     # max length of 1000 is randomly picked to handle dictionary length
     address = models.CharField(max_length=1000)
@@ -82,3 +82,44 @@ class Photographer(models.Model):
 
     def get_appointments(self):
         return json.loads(self.appointments)
+
+
+
+
+'''
+    {
+        "vendor_id": 1,
+        "company_name": "2",
+        "address": "3",
+        "phone_number": "4",
+        "email": "nick@findingspaces.com",
+        "availability": "6",
+        "acceptance_score": 7,
+        "total_job_offers": 8,
+        "rating_score": 9,
+        "total_ratings": 10,
+        "fixed_cost": 11,
+        "distance_cost": "12",
+        "size_cost": "13",
+        "appointments": "14",
+        "status": "active"
+    },
+    {
+        "vendor_id": 10,
+        "company_name": "1",
+        "address": "2",
+        "phone_number": "3",
+        "email": "4@findingspaces.com",
+        "availability": "5",
+        "acceptance_score": 6,
+        "total_job_offers": 7,
+        "rating_score": 8,
+        "total_ratings": 9,
+        "fixed_cost": 10,
+        "distance_cost": "11",
+        "size_cost": "12",
+        "appointments": "{13}",
+        "status": "active"
+    }
+
+'''

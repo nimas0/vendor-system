@@ -1,33 +1,15 @@
 from rest_framework import serializers
 from .models import Photographer
+from django.contrib.auth.models import User
+from rest_framework.authtoken.views import Token
 
 
-
-# For testing: p = Photographer(vendor_id = 0, company_name = "1", address = "2", phone_number = "3", email = "4@findingspaces.com", availability = "5", acceptance_score = 6, total_job_offers = 7, rating_score = 8, total_ratings = 9, fixed_cost = 10, distance_cost = "11", size_cost = "12")
-#              p.save()
-"""
- {"vendor_id" : 0,
- "company_name" : "1", 
- "address": "2", 
- "phone_number" : "3", 
- "email" : "4@findingspaces.com", 
- "availability" : "5", 
- "acceptance_score" : 6, 
- "total_job_offers" : 7, 
- "rating_score" : 8, 
- "total_ratings" : 9, 
- "fixed_cost" : 10, 
- "distance_cost" : "11", 
- "size_cost" : "12",
- "appointments":"{13}",
- "status":"active"
- }
- """
 class PhotographerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photographer
         fields = [
-            'vendor_id',
+           # 'vendor_id',
+            'id',
             'company_name',
             'address',
             'phone_number',
@@ -43,6 +25,21 @@ class PhotographerSerializer(serializers.ModelSerializer):
             'appointments',
             'status']
 
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'password']
+    
+        extra_kwargs = { 'password': {
+            'write_only': True,
+            'required': True
+        }}
+
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+       # Token.objects.create(user=user)
+        return user
 
 
 
