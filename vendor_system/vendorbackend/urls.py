@@ -10,9 +10,7 @@ router.register('users', UserViewSet)
 
 
 urlpatterns = [
-
     path('api/', include(router.urls))
-
     #path('photographers/', PhotographerList.as_view()),
     #path('photographers/<int:vendor_id>/', PhotographerDetails.as_view())
     # path('photographers/', photographer_list),
