@@ -14,7 +14,7 @@ class Photographer(models.Model):
         ('inactive', 'Inactive')
     )
 
-    # vendor_id = models.IntegerField(primary_key=True)
+    #vendor_id = models.IntegerField(primary_key=True)
     company_name = models.CharField(max_length=1000)
     # max length of 1000 is randomly picked to handle dictionary length
     address = models.CharField(max_length=1000)
